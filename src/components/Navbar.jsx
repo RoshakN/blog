@@ -12,9 +12,9 @@ export default function Navbar() {
         <Link to="/createpost" className="mx-2">
           CREATE POST
         </Link>
-        <Link to="/login" className="mx-2">
+        {<Link to="/login" className="mx-2">
           LOGIN
-        </Link>
+        </Link>}
       </div>
       <p className="ml-auto">icon</p>
     </div>
