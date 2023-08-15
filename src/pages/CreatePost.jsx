@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { addDoc, collection } from "firebase/firestore";
 import { dataBase, auth } from "../services/firebase-config";
+import { useNavigate } from "react-router-dom";
 
 export default function CreatePost() {
   const [title, setTitle] = useState("");
   const [postText, setPostText] = useState("");
 
+  let navigate = useNavigate();
   const postsCollection = collection(dataBase, "posts");
 
   const createPost = async () => {
@@ -14,6 +16,7 @@ export default function CreatePost() {
       postText,
       author: { name: auth.currentUser.displayName, id: auth.currentUser.uid },
     });
+    navigate("/");
   };
   return (
     <div className="flex flex-col items-center justify-center mt-3">
