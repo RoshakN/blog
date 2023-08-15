@@ -1,4 +1,9 @@
+import { useState } from "react";
+
 export default function CreatePost() {
+  const [title, setTitle] = useState("");
+  const [text, setText] = useState("");
+
   return (
     <div className="flex flex-col items-center justify-center mt-3">
       <img
@@ -10,11 +15,17 @@ export default function CreatePost() {
         <input
           type="text"
           placeholder="Title..."
+          onChange={(event) => {
+            setTitle(event.target.value);
+          }}
           className="px-2 w-full outline-none text-2xl sm:text-4xl text-slate-500 focus-within:placeholder-blue-200"
         />
         <textarea
           placeholder="Tell your story..."
           rows={7}
+          onChange={(event) => {
+            setText(event.target.value);
+          }}
           className="outline-none px-4 my-3 w-full text-base sm:text-xl text-slate-400 focus-within:placeholder-blue-200"
         />
       </div>
