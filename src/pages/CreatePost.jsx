@@ -1,9 +1,20 @@
 import { useState } from "react";
+import { addDoc, collection } from "firebase/firestore";
+import { dataBase, auth } from "../services/firebase-config";
 
 export default function CreatePost() {
   const [title, setTitle] = useState("");
-  const [text, setText] = useState("");
+  const [postText, setPostText] = useState("");
 
+  const postsCollection = collection(dataBase, "posts");
+
+  const createPost = async () => {
+    await addDoc(postsCollection, {
+      title,
+      postText,
+      author: { name: auth.currentUser.displayName, id: auth.currentUser.uid },
+    });
+  };
   return (
     <div className="flex flex-col items-center justify-center mt-3">
       <img
@@ -24,12 +35,15 @@ export default function CreatePost() {
           placeholder="Tell your story..."
           rows={7}
           onChange={(event) => {
-            setText(event.target.value);
+            setPostText(event.target.value);
           }}
           className="outline-none px-4 my-3 w-full text-base sm:text-xl text-slate-400 focus-within:placeholder-blue-200"
         />
       </div>
-      <button className="bg-slate-500 py-2 px-4 rounded-md text-white mb-3 active:bg-slate-300 active:text-black ease-out duration-300">
+      <button
+        onClick={createPost}
+        className="bg-slate-500 py-2 px-4 rounded-md text-white mb-3 active:bg-slate-300 active:text-black ease-out duration-300"
+      >
         Publish
       </button>
     </div>
