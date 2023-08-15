@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { addDoc, collection } from "firebase/firestore";
 import { dataBase, auth } from "../services/firebase-config";
 import { useNavigate } from "react-router-dom";
 
-export default function CreatePost() {
+export default function CreatePost({ isAuth }) {
   const [title, setTitle] = useState("");
   const [postText, setPostText] = useState("");
 
@@ -18,6 +18,13 @@ export default function CreatePost() {
     });
     navigate("/");
   };
+
+  useEffect(() => {
+    if (!isAuth) {
+      navigate("/login");
+    }
+  }, []);
+
   return (
     <div className="flex flex-col items-center justify-center mt-3">
       <img
