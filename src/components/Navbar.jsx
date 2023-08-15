@@ -24,22 +24,25 @@ export default function Navbar({ isAuth, setIsAuth }) {
         <Link to="/" className="mx-2">
           HOME
         </Link>
-        <Link to="/createpost" className="mx-2">
-          WRITE
-        </Link>
+
         {!isAuth ? (
           <Link to="/login" className="mx-2">
             LOGIN
           </Link>
         ) : (
-          <p
-            onClick={() => {
-              signUserOut();
-            }}
-            className="cursor-pointer inline-block mx-2"
-          >
-            LOGOUT
-          </p>
+          <>
+            <Link to="/createpost" className="mx-2">
+              WRITE
+            </Link>
+            <p
+              onClick={() => {
+                signUserOut();
+              }}
+              className="cursor-pointer inline-block mx-2"
+            >
+              LOGOUT
+            </p>
+          </>
         )}
       </div>
       <p className="ml-auto">icon</p>
