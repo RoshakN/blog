@@ -3,7 +3,7 @@ import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import CreatePost from "./pages/CreatePost";
-import { createContext, useState } from "react";
+import { useState } from "react";
 import "./index.css";
 
 function App() {
@@ -11,7 +11,7 @@ function App() {
 
   return (
     <Router>
-      <Navbar />
+      <Navbar isAuth={isAuth} setIsAuth={setIsAuth} />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/createpost" element={<CreatePost />} />
@@ -21,5 +21,4 @@ function App() {
   );
 }
 
-// export const AuthContext = createContext();
 export default App;
