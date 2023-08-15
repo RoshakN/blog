@@ -25,7 +25,7 @@ export default function Navbar({ isAuth, setIsAuth }) {
           HOME
         </Link>
         <Link to="/createpost" className="mx-2">
-          CREATE POST
+          WRITE
         </Link>
         {!isAuth ? (
           <Link to="/login" className="mx-2">
