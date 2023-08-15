@@ -9,7 +9,7 @@ export default function Login({ setIsAuth }) {
     signInWithPopup(auth, provider).then((result) => {
       localStorage.setItem("isAuth", true);
       setIsAuth(true);
-      navigate("/");
+      navigate("/createpost");
     });
   };
 
