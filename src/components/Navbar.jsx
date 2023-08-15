@@ -13,7 +13,7 @@ export default function Navbar({ isAuth, setIsAuth }) {
     });
   };
   return (
-    <div className="text-base font-light font-dosis bg-slate-400 text-white sticky flex justify-between items-center px-5 py-2 sm:text-xl">
+    <div className="sticky top-0 text-base font-light font-dosis bg-slate-400 text-white flex justify-between items-center px-5 py-2 sm:text-xl">
       <Link
         to="/"
         className="text-2xl mr-3 sm:text-4xl sm:mr-7 font-tsukimi font-bold"
