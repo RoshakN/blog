@@ -7,7 +7,9 @@ import { useState } from "react";
 import "./index.css";
 
 function App() {
-  const [isAuth, setIsAuth] = useState(false);
+  const storedAuth = JSON.parse(localStorage.getItem("isAuth"));
+
+  const [isAuth, setIsAuth] = useState(storedAuth || false);
 
   return (
     <Router>
