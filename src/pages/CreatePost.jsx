@@ -25,6 +25,8 @@ export default function CreatePost({ isAuth }) {
     }
   }, []);
 
+  let postContent = title && postText;
+
   return (
     <div className="flex flex-col items-center justify-center mt-3">
       <img
@@ -51,8 +53,12 @@ export default function CreatePost({ isAuth }) {
         />
       </div>
       <button
-        onClick={createPost}
-        className="bg-slate-500 py-2 px-4 rounded-md text-white mb-3 active:bg-slate-300 active:text-black ease-out duration-300"
+        onClick={postContent && createPost}
+        className={
+          postContent
+            ? "bg-slate-500 py-2 px-4 rounded-md text-white mb-3 active:bg-slate-300 active:text-black ease-out duration-300"
+            : "bg-slate-500 py-2 px-4 rounded-md text-white mb-3 active:bg-slate-300 active:text-black ease-out duration-300 cursor-not-allowed"
+        }
       >
         Publish
       </button>
