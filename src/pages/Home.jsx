@@ -1,117 +1,31 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { getDocs, collection } from "firebase/firestore";
+import { dataBase } from "../services/firebase-config";
 
 export default function Home() {
+  const [posts, setPosts] = useState([]);
+
+  const postsCollection = collection(dataBase, "posts");
+
+  useEffect(() => {
+    const getPosts = async () => {
+      const data = await getDocs(postsCollection);
+      setPosts(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    };
+    getPosts();
+  }, []);
   return (
     <div>
-      Home page
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia excepturi
-        ipsa quis cupiditate consequuntur! Explicabo veritatis ullam aspernatur
-        modi voluptas corporis, pariatur, alias rem ipsa cupiditate commodi
-        minus deserunt eligendi? Lorem ipsum dolor sit amet consectetur
-        adipisicing elit. Laudantium tempora tenetur mollitia soluta, ex
-        obcaecati pariatur odio unde ea, odit cum error, quas enim nobis.
-        Asperiores provident atque magnam ab. Lorem ipsum dolor sit amet
-        consectetur adipisicing elit. Deleniti nobis, incidunt facilis, quas nam
-        minus eius quam assumenda ad animi optio maxime, dignissimos praesentium
-        velit voluptate quasi officiis repudiandae delectus!{" "}
-      </p>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia excepturi
-        ipsa quis cupiditate consequuntur! Explicabo veritatis ullam aspernatur
-        modi voluptas corporis, pariatur, alias rem ipsa cupiditate commodi
-        minus deserunt eligendi? Lorem ipsum dolor sit amet consectetur
-        adipisicing elit. Laudantium tempora tenetur mollitia soluta, ex
-        obcaecati pariatur odio unde ea, odit cum error, quas enim nobis.
-        Asperiores provident atque magnam ab. Lorem ipsum dolor sit amet
-        consectetur adipisicing elit. Deleniti nobis, incidunt facilis, quas nam
-        minus eius quam assumenda ad animi optio maxime, dignissimos praesentium
-        velit voluptate quasi officiis repudiandae delectus!{" "}
-      </p>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia excepturi
-        ipsa quis cupiditate consequuntur! Explicabo veritatis ullam aspernatur
-        modi voluptas corporis, pariatur, alias rem ipsa cupiditate commodi
-        minus deserunt eligendi? Lorem ipsum dolor sit amet consectetur
-        adipisicing elit. Laudantium tempora tenetur mollitia soluta, ex
-        obcaecati pariatur odio unde ea, odit cum error, quas enim nobis.
-        Asperiores provident atque magnam ab. Lorem ipsum dolor sit amet
-        consectetur adipisicing elit. Deleniti nobis, incidunt facilis, quas nam
-        minus eius quam assumenda ad animi optio maxime, dignissimos praesentium
-        velit voluptate quasi officiis repudiandae delectus!{" "}
-      </p>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia excepturi
-        ipsa quis cupiditate consequuntur! Explicabo veritatis ullam aspernatur
-        modi voluptas corporis, pariatur, alias rem ipsa cupiditate commodi
-        minus deserunt eligendi? Lorem ipsum dolor sit amet consectetur
-        adipisicing elit. Laudantium tempora tenetur mollitia soluta, ex
-        obcaecati pariatur odio unde ea, odit cum error, quas enim nobis.
-        Asperiores provident atque magnam ab. Lorem ipsum dolor sit amet
-        consectetur adipisicing elit. Deleniti nobis, incidunt facilis, quas nam
-        minus eius quam assumenda ad animi optio maxime, dignissimos praesentium
-        velit voluptate quasi officiis repudiandae delectus!{" "}
-      </p>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia excepturi
-        ipsa quis cupiditate consequuntur! Explicabo veritatis ullam aspernatur
-        modi voluptas corporis, pariatur, alias rem ipsa cupiditate commodi
-        minus deserunt eligendi? Lorem ipsum dolor sit amet consectetur
-        adipisicing elit. Laudantium tempora tenetur mollitia soluta, ex
-        obcaecati pariatur odio unde ea, odit cum error, quas enim nobis.
-        Asperiores provident atque magnam ab. Lorem ipsum dolor sit amet
-        consectetur adipisicing elit. Deleniti nobis, incidunt facilis, quas nam
-        minus eius quam assumenda ad animi optio maxime, dignissimos praesentium
-        velit voluptate quasi officiis repudiandae delectus!{" "}
-      </p>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia excepturi
-        ipsa quis cupiditate consequuntur! Explicabo veritatis ullam aspernatur
-        modi voluptas corporis, pariatur, alias rem ipsa cupiditate commodi
-        minus deserunt eligendi? Lorem ipsum dolor sit amet consectetur
-        adipisicing elit. Laudantium tempora tenetur mollitia soluta, ex
-        obcaecati pariatur odio unde ea, odit cum error, quas enim nobis.
-        Asperiores provident atque magnam ab. Lorem ipsum dolor sit amet
-        consectetur adipisicing elit. Deleniti nobis, incidunt facilis, quas nam
-        minus eius quam assumenda ad animi optio maxime, dignissimos praesentium
-        velit voluptate quasi officiis repudiandae delectus!{" "}
-      </p>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia excepturi
-        ipsa quis cupiditate consequuntur! Explicabo veritatis ullam aspernatur
-        modi voluptas corporis, pariatur, alias rem ipsa cupiditate commodi
-        minus deserunt eligendi? Lorem ipsum dolor sit amet consectetur
-        adipisicing elit. Laudantium tempora tenetur mollitia soluta, ex
-        obcaecati pariatur odio unde ea, odit cum error, quas enim nobis.
-        Asperiores provident atque magnam ab. Lorem ipsum dolor sit amet
-        consectetur adipisicing elit. Deleniti nobis, incidunt facilis, quas nam
-        minus eius quam assumenda ad animi optio maxime, dignissimos praesentium
-        velit voluptate quasi officiis repudiandae delectus!{" "}
-      </p>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia excepturi
-        ipsa quis cupiditate consequuntur! Explicabo veritatis ullam aspernatur
-        modi voluptas corporis, pariatur, alias rem ipsa cupiditate commodi
-        minus deserunt eligendi? Lorem ipsum dolor sit amet consectetur
-        adipisicing elit. Laudantium tempora tenetur mollitia soluta, ex
-        obcaecati pariatur odio unde ea, odit cum error, quas enim nobis.
-        Asperiores provident atque magnam ab. Lorem ipsum dolor sit amet
-        consectetur adipisicing elit. Deleniti nobis, incidunt facilis, quas nam
-        minus eius quam assumenda ad animi optio maxime, dignissimos praesentium
-        velit voluptate quasi officiis repudiandae delectus!{" "}
-      </p>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia excepturi
-        ipsa quis cupiditate consequuntur! Explicabo veritatis ullam aspernatur
-        modi voluptas corporis, pariatur, alias rem ipsa cupiditate commodi
-        minus deserunt eligendi? Lorem ipsum dolor sit amet consectetur
-        adipisicing elit. Laudantium tempora tenetur mollitia soluta, ex
-        obcaecati pariatur odio unde ea, odit cum error, quas enim nobis.
-        Asperiores provident atque magnam ab. Lorem ipsum dolor sit amet
-        consectetur adipisicing elit. Deleniti nobis, incidunt facilis, quas nam
-        minus eius quam assumenda ad animi optio maxime, dignissimos praesentium
-        velit voluptate quasi officiis repudiandae delectus!{" "}
-      </p>
+      {posts.map((post) => {
+        return (
+          <div key={post.id} className="post">
+            <div className="postHeader">
+              <h1 className="postTitle">{post.title}</h1>
+              <button>Edit Post</button>
+            </div>
+          </div>
+        );
+      })}
     </div>
   );
 }
