@@ -18,11 +18,29 @@ export default function Home() {
     <div>
       {posts.map((post) => {
         return (
-          <div key={post.id} className="post">
-            <div className="postHeader">
-              <h1 className="postTitle">{post.title}</h1>
-              <button>Edit Post</button>
+          <div
+            key={post.id}
+            className="mx-auto max-w-xs sm:max-w-sm md:max-w-screen-md lg:max-w-screen-lg h-96 my-4 bg-gradient-to-br from from-slate-500 to to-slate-400 shadow-md shadow-gray-400 text-neutral-50 flex flex-col rounded-md"
+          >
+            <div className="bg-white bg-opacity-30 py-2 px-3 flex items-start justify-between rounded-t-sm">
+              <div className="flex flex-col">
+                <h1 className="font-tsukimi font-bold text-2xl">
+                  {post.title}
+                </h1>
+                <div className="font-light text-sm">by: {post.author.name}</div>
+              </div>
+              <button className="font-extralight text-xs hover:font-normal">
+                Edit Post
+              </button>
             </div>
+            <p
+              name="Post Text"
+              id={post.id}
+              className="p-5 resize-none bg-transparent overflow-y-auto border-none outline-none text-justify indent-4 first-letter:text-4xl first-letter:font-bold first-letter:mr-1"
+              disabled
+            >
+              {post.postText}
+            </p>
           </div>
         );
       })}
