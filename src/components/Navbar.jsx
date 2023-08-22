@@ -13,10 +13,10 @@ export default function Navbar({ isAuth, setIsAuth }) {
     });
   };
   return (
-    <div className="sticky top-0 text-base font-light font-dosis bg-slate-400 text-white flex justify-between items-center px-5 py-2 sm:text-xl">
+    <div className="sticky top-0 flex items-center justify-between px-5 py-2 text-base font-light text-white font-dosis bg-slate-400 sm:text-xl">
       <Link
         to="/"
-        className="text-2xl mr-3 sm:text-4xl sm:mr-7 font-tsukimi font-bold"
+        className="mr-3 text-2xl font-bold sm:text-4xl sm:mr-7 font-tsukimi"
       >
         The Blob
       </Link>
@@ -38,7 +38,7 @@ export default function Navbar({ isAuth, setIsAuth }) {
               onClick={() => {
                 signUserOut();
               }}
-              className="cursor-pointer inline-block mx-2"
+              className="inline-block mx-2 cursor-pointer"
             >
               LOGOUT
             </p>
