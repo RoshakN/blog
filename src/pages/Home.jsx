@@ -26,7 +26,7 @@ export default function Home({ isAuth }) {
           This is a public blog, so YOU can make a post too! Just head on over
           to
           <Link to={!isAuth ? "./login" : "./createpost"}>
-            <span className="cursor-pointer text-cyan-200">this page</span>
+          <span className="cursor-pointer text-cyan-200"> this page </span>
           </Link>
           and start telling your story :)
         </p>
