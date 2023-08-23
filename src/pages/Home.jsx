@@ -14,7 +14,7 @@ export default function Home({ isAuth }) {
   useEffect(() => {
     const getPosts = async () => {
       const data = await getDocs(postsCollection);
-      setPosts(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+      setPosts(data.docs.map((doc) => ({ ...doc.data(), id: doc.id, creationTime: doc._document.createTime.timestamp.seconds })));
       console.log(data);
     };
     getPosts();
@@ -44,7 +44,7 @@ export default function Home({ isAuth }) {
                 <h1 className="my-2 text-2xl font-bold font-tsukimi">
                   {post.title}
                 </h1>
-                <div className="text-sm font-light">by: {post.author.name}</div>
+                <div className="text-sm font-light">by: {post.author.name} at: {post.creationTime}</div>
               </div>
               <button className="text-xs font-extralight hover:font-normal">
                 Edit Post
