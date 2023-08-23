@@ -14,7 +14,7 @@ export default function Home({ isAuth }) {
   useEffect(() => {
     const getPosts = async () => {
       const data = await getDocs(postsCollection);
-      setPosts(data.docs.map((doc) => ({ ...doc.data(), id: doc.id, creationTime: doc._document.createTime.timestamp.seconds })));
+      setPosts(data.docs.map((doc) => ({ ...doc.data(), id: doc.id, creationTime: (new Date(doc._document.createTime.timestamp.seconds * 1000)).toLocaleString() })));
       console.log(data);
     };
     getPosts();
