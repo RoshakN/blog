@@ -1,37 +1,59 @@
 import { useEffect, useState } from "react";
-import { getDocs, collection } from "firebase/firestore";
-import { dataBase } from "../services/firebase-config";
+import { getDocs, collection, deleteDoc, doc } from "firebase/firestore";
+import { auth, dataBase } from "../services/firebase-config";
 import { Link } from "react-router-dom";
 import { CrossCircle } from "react-flaticons";
 
 export default function Home({ isAuth }) {
   const [posts, setPosts] = useState([]);
 
-  const [showHeader, setShowHeader] = useState(true)
+  const [showHeader, setShowHeader] = useState(true);
 
   const postsCollection = collection(dataBase, "posts");
 
   useEffect(() => {
     const getPosts = async () => {
       const data = await getDocs(postsCollection);
-      setPosts(data.docs.map((doc) => ({ ...doc.data(), id: doc.id, creationTime: (new Date(doc._document.createTime.timestamp.seconds * 1000)).toLocaleString() })));
+      setPosts(
+        data.docs.map((doc) => ({
+          ...doc.data(),
+          id: doc.id,
+          creationTime: new Date(
+            doc._document.createTime.timestamp.seconds * 1000
+          ).toLocaleString(),
+        }))
+      );
       console.log(data);
     };
     getPosts();
   }, []);
+
+  const deletePost = async (id) => {
+    const postDoc = doc(dataBase, "posts", id);
+    await deleteDoc(postDoc);
+  };
+
   return (
     <div>
-      {showHeader && <div className="relative">
-        <p className="py-4 text-xl text-center shadow-md font-tsukimi bg-gradient-to-br from from-slate-500 to to-slate-400 shadow-gray-400 text-neutral-50 md:text-2xl">
-          This is a public blog, so YOU can make a post too! Just head on over
-          to
-          <Link to={!isAuth ? "./login" : "./createpost"}>
-          <span className="cursor-pointer text-cyan-200"> this page </span>
-          </Link>
-          and start telling your story :)
-        </p>
-        <CrossCircle size={14} onClick={() => {setShowHeader(!showHeader)}} className="absolute text-white hover:scale-125 hover:cursor-pointer right-2 top-2"/>
-      </div>}
+      {showHeader && (
+        <div className="relative">
+          <p className="py-4 text-xl text-center shadow-md font-tsukimi bg-gradient-to-br from from-slate-500 to to-slate-400 shadow-gray-400 text-neutral-50 md:text-2xl">
+            This is a public blog, so YOU can make a post too! Just head on over
+            to
+            <Link to={!isAuth ? "./login" : "./createpost"}>
+              <span className="cursor-pointer text-cyan-200"> this page </span>
+            </Link>
+            and start telling your story :)
+          </p>
+          <CrossCircle
+            size={14}
+            onClick={() => {
+              setShowHeader(!showHeader);
+            }}
+            className="absolute text-white hover:scale-125 hover:cursor-pointer right-2 top-2"
+          />
+        </div>
+      )}
 
       {posts.map((post) => {
         return (
@@ -44,11 +66,26 @@ export default function Home({ isAuth }) {
                 <h1 className="my-2 text-2xl font-bold font-tsukimi">
                   {post.title}
                 </h1>
-                <div className="text-sm font-light">by: {post.author.name} at: {post.creationTime}</div>
+                <div className="text-sm font-light">
+                  by: {post.author.name} at: {post.creationTime}
+                </div>
               </div>
-              <button className="text-xs font-extralight hover:font-normal">
-                Edit Post
-              </button>
+              {isAuth && post.author.id === auth.currentUser.uid && (
+                <div className="ml-auto">
+                  {/* Functionality will be added later
+                  <button className="mr-2 text-xs font-extralight hover:font-normal">
+                    Edit Post
+                  </button> */}
+                  <button
+                    onClick={() => {
+                      deletePost(post.id);
+                    }}
+                    className="text-xs font-extralight hover:font-normal"
+                  >
+                    Delete Post
+                  </button>
+                </div>
+              )}
             </div>
             <p
               name="Post Text"
