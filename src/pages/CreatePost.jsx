@@ -34,14 +34,14 @@ export default function CreatePost({ isAuth }) {
         alt="placeholder img"
         className="w-4/5 max-w-4xl rounded-xl drop-shadow-lg"
       />
-      <div className="my-5 w-4/5 max-w-4xl">
+      <div className="w-4/5 max-w-4xl my-5">
         <input
           type="text"
           placeholder="Title..."
           onChange={(event) => {
             setTitle(event.target.value);
           }}
-          className="px-2 w-full outline-none text-2xl sm:text-4xl text-slate-500 focus-within:placeholder-blue-200"
+          className="w-full px-2 text-2xl outline-none sm:text-4xl text-slate-500 focus-within:placeholder-blue-200"
         />
         <textarea
           placeholder="Tell your story..."
@@ -49,7 +49,7 @@ export default function CreatePost({ isAuth }) {
           onChange={(event) => {
             setPostText(event.target.value);
           }}
-          className="outline-none px-4 my-3 w-full text-base sm:text-xl text-slate-400 focus-within:placeholder-blue-200"
+          className="w-full px-4 my-3 text-base outline-none sm:text-xl text-slate-400 focus-within:placeholder-blue-200"
         />
       </div>
       <button
