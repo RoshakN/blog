@@ -1,11 +1,5 @@
 import { useEffect, useState } from "react";
-import {
-  getDocs,
-  collection,
-  deleteDoc,
-  doc,
-  orderBy,
-} from "firebase/firestore";
+import { getDocs, collection, deleteDoc, doc } from "firebase/firestore";
 import { auth, dataBase } from "../services/firebase-config";
 import { Link } from "react-router-dom";
 import { CrossCircle } from "react-flaticons";
@@ -29,7 +23,6 @@ export default function Home({ isAuth }) {
           ),
         }))
       );
-      console.log(data);
     };
     getPosts();
   }, []);
@@ -62,11 +55,11 @@ export default function Home({ isAuth }) {
       )}
 
       {posts
-        .sort((a, b) => a.creationTime - b.creationTime)
+        .sort((a, b) => b.creationTime - a.creationTime)
         .map((post) => {
           return (
             <div
-              key={post.creationTime}
+              key={post.id}
               className="flex flex-col max-w-xs mx-auto my-4 rounded-md shadow-md sm:max-w-sm md:max-w-screen-md lg:max-w-screen-lg h-96 bg-gradient-to-br from from-slate-500 to to-slate-400 shadow-gray-400 text-neutral-50"
             >
               <div className="flex items-start justify-between px-3 py-2 bg-black rounded-t-sm bg-opacity-30">
@@ -75,8 +68,7 @@ export default function Home({ isAuth }) {
                     {post.title}
                   </h1>
                   <div className="text-sm font-light">
-                    by: {post.author.name} at:{" "}
-                    {post.creationTime.toLocaleString()}
+                    by: {post.author.name} at: {post.creationTime.toLocaleString()}
                   </div>
                 </div>
                 {isAuth && post.author.id === auth.currentUser.uid && (
